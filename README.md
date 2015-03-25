@@ -1,8 +1,8 @@
-linear-regression
+Linear Regression
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Linear regression.
+> Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable.
 
 
 ## Installation
@@ -17,18 +17,41 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 ## Usage
 
 ``` javascript
-var foo = require( 'compute-linear-regression' );
+var lr = require( 'compute-linear-regression' );
 ```
 
-#### foo( arr )
+#### lr( x, y[, opts] )
 
-What does this function do?
+Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. `x` is the independent variable (1D regressor `array`), and `y` is the dependent variable (1D response `array`). 
+
+``` javascript
+var x, y, results;
+
+x = [ ];
+y = [ ];
+
+results = lr( x, y );
+// returns {'slope': NaN, 'intercept': NaN}
+```
+
+
+The function accepts the following `options`:
+
+*	__residuals__: `boolean` indicating whether to return the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
+* 	__accessors__: `object` providing accessor `functions`
+	-	__x__: accessor `function` for accessing `x` array values
+	-	__y__: accessor `function` for accessing `y` array values
+*	__slope__: known slope
+*	__intercept__: known *y*-intercept
+*	...
+
+
 
 
 ## Examples
 
 ``` javascript
-var foo = require( 'compute-linear-regression' );
+var lr = require( 'compute-linear-regression' );
 ```
 
 To run the example code from the top-level application directory,

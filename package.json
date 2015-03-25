@@ -25,12 +25,29 @@
   "keywords": [
     "compute.io",
     "compute",
-    "computation"
+    "computation",
+    "mathematics",
+    "math",
+    "statistics",
+    "stats",
+    "model",
+    "linear",
+    "regression",
+    "regress",
+    "linear regression",
+    "machine learning",
+    "slope",
+    "intercept",
+    "fit",
+    "least squares"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/linear-regression/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "validate.io-number-array": "^1.0.0",
+    "validate.io-object": "^1.0.3"
+  },
   "devDependencies": {
     "chai": "2.x.x",
     "mocha": "2.x.x",
