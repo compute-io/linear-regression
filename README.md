@@ -1,4 +1,4 @@
-Linear Regression
+Simple Linear Regression
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
@@ -22,27 +22,43 @@ var lr = require( 'compute-linear-regression' );
 
 #### lr( x, y[, opts] )
 
-Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. `x` is the independent variable (1D regressor `array`), and `y` is the dependent variable (1D response `array`). 
+Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable.
 
 ``` javascript
 var x, y, results;
 
+// Independent (explanatory) variable array:
 x = [ ];
+
+// Dependent (response) variable array:
 y = [ ];
 
 results = lr( x, y );
-// returns {'slope': NaN, 'intercept': NaN}
+// returns {...}
 ```
 
+The basic returned `results` object is comprised as follows:
+
+``` javascript
+{
+	'coefficients': {
+		'intercept': Number,
+		'slope': Number
+	}
+}
+```
 
 The function accepts the following `options`:
 
+* 	__accessors__: `object` providing accessor `functions`.
+	-	__x__: accessor `function` for accessing explanatory values.
+	-	__y__: accessor `function` for accessing response values.
+*	__slope__: known slope.
+*	__intercept__: known *y*-intercept.
 *	__residuals__: `boolean` indicating whether to return the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
-* 	__accessors__: `object` providing accessor `functions`
-	-	__x__: accessor `function` for accessing `x` array values
-	-	__y__: accessor `function` for accessing `y` array values
-*	__slope__: known slope
-*	__intercept__: known *y*-intercept
+*	__ci__: `boolean` indicating whether to return estimate confidence intervals.
+*	__summary__: `boolean` indicating whether to return a statistical summary.
+*	__predictor__: `boolean` indicating whether to return a predictor `function`.
 *	...
 
 
