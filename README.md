@@ -22,30 +22,23 @@ var lr = require( 'compute-linear-regression' );
 
 #### lr( x, y[, opts] )
 
-Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable.
+Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. The model assumes a *linear polynomial* of the form
 
-``` javascript
-var x, y, results;
-
-// Independent (explanatory) variable array:
-x = [ ];
-
-// Dependent (response) variable array:
-y = [ ];
-
-results = lr( x, y );
-// returns {...}
+```
+y = a + bx
 ```
 
-The basic returned `results` object is comprised as follows:
+describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the *explanatory*, *predictor*, or *regressor* variable, and `y` is commonly referred to as the *response* variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`.
+
+To compute a (simple) linear regression model using [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares),
 
 ``` javascript
-{
-	'coefficients': {
-		'intercept': Number,
-		'slope': Number
-	}
-}
+var x, y;
+
+x = [ ];
+y = [ ];
+
+var model = lr( x, y );
 ```
 
 The function accepts the following `options`:
@@ -55,6 +48,34 @@ The function accepts the following `options`:
 	-	__y__: accessor `function` for accessing response values.
 *	__slope__: known slope.
 *	__intercept__: known *y*-intercept.
+
+For non-numeric `arrays`, provide accessor `functions` for accessing `array` values.
+
+``` javascript
+function xValue( d ) {
+	return d.x;
+}
+
+function yValue( d ) {
+	return d.y;
+}
+
+var data = [
+	{'x':0,'y':1},
+	{'x':1,'y':2},
+	...
+];
+
+var model = lr( x, y, {
+	'accessors': {
+		'x': xValue,
+		'y': yValue
+	}
+});
+```
+
+
+
 *	__residuals__: `boolean` indicating whether to return the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
 *	__ci__: `boolean` indicating whether to return estimate confidence intervals.
 *	__summary__: `boolean` indicating whether to return a statistical summary.
