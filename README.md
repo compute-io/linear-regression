@@ -25,12 +25,20 @@ var lr = require( 'compute-linear-regression' );
 Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. The model assumes a *linear polynomial* of the form
 
 ```
-y = a + bx
+f(x) = y = a + bx
 ```
 
-describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the *explanatory*, *predictor*, or *regressor* variable, and `y` is commonly referred to as the *response* variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`.
+describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the *explanatory*, *predictor*, or *regressor* variable, and `y` is commonly referred to as the *response* variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`. Geometrically, `f(x)` is a straight line having a *y*-intercept `a` and a slope `b`.
 
-To compute a (simple) linear regression model using [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares),
+To determine the model parameters `a` and `b`, this implementation uses [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares) (OLS) to fit a straight line to the data. Intuitively, our goal is to find a line having a slope and *y*-intercept which minimizes the distance between an observation and its corresponding fitted value. To achieve this goal, OLS seeks to minimize the following function
+
+```
+L = sum^{N-1}_{i=0} [y_i - f(x_i)]^2
+```
+
+where `N` is the number of observations and `y_i - f(x_i)` corresponds to the vertical distance between an observation `y_i` and a predicted value `f(x_i)`. The smaller each distance between `y_i` and `f(x_i)` is, the smaller the sum and the better the fit.
+
+To compute a (simple) linear regression model,
 
 ``` javascript
 var x, y;
@@ -46,8 +54,8 @@ The function accepts the following `options`:
 * 	__accessors__: `object` providing accessor `functions`.
 	-	__x__: accessor `function` for accessing explanatory values.
 	-	__y__: accessor `function` for accessing response values.
-*	__slope__: known slope.
-*	__intercept__: known *y*-intercept.
+*	__slope__: known slope; i.e., known `b`.
+*	__intercept__: known *y*-intercept; i.e., known `a`.
 
 For non-numeric `arrays`, provide accessor `functions` for accessing `array` values.
 
