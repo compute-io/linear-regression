@@ -77,20 +77,9 @@ var model = lr( x, y, {
 
 
 
-## Examples
-
-``` javascript
-var lr = require( 'compute-linear-regression' );
-```
-
-To run the example code from the top-level application directory,
-
-``` bash
-$ node ./examples/index.js
-```
 
 
-## Overview
+## Notes
 
 The (simple) linear regression model assumes a *linear polynomial* of the form
 
@@ -107,6 +96,21 @@ L = sum^{N-1}_{i=0} [y_i - f(x_i)]^2
 ```
 
 where `N` is the number of observations and `y_i - f(x_i)` corresponds to the vertical distance between an observation `y_i` and a predicted value `f(x_i)`. The smaller each distance between `y_i` and `f(x_i)` is, the smaller the sum and the better the fit.
+
+
+
+## Examples
+
+``` javascript
+var lr = require( 'compute-linear-regression' );
+```
+
+To run the example code from the top-level application directory,
+
+``` bash
+$ node ./examples/index.js
+```
+
 
 
 ## Tests
