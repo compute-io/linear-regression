@@ -35,11 +35,14 @@
     "regression",
     "regress",
     "linear regression",
+    "linear model",
     "machine learning",
     "slope",
     "intercept",
     "fit",
-    "least squares"
+    "least squares",
+    "ols",
+    "best fit"
   ],
   "bugs": {
     "url": "https://github.com/compute-io/linear-regression/issues"

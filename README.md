@@ -227,7 +227,7 @@ var x = [
 	...
 ];
 
-var prediction = model.predicct( x, {
+var prediction = model.predict( x, {
 	'accessor': xValue
 });
 // returns {...}
