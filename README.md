@@ -2,7 +2,7 @@ Simple Linear Regression
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> A [least squares](http://en.wikipedia.org/wiki/Least_squares) [estimator](http://stats.stackexchange.com/questions/7581/what-is-the-relation-between-estimator-and-estimate) of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable.
+> A [least squares](http://en.wikipedia.org/wiki/Least_squares) [estimator](http://stats.stackexchange.com/questions/7581/what-is-the-relation-between-estimator-and-estimate) for a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable.
 
 
 ## Installation
@@ -54,7 +54,7 @@ The function accepts the following `options`:
 *	__slope__: known slope.
 *	__intercept__: known *y*-intercept.
 
-To provide arbitrary access to input `array` values, provide accessor `functions`.
+To facilitate arbitrary input data structures, the function accepts accessor `functions`.
 
 ``` javascript
 function xValue( d, i ) {
@@ -119,7 +119,7 @@ model = lr( x, y, {
 });
 ```
 
-Note that, in the special case where the *y*-intercept is `0`, this is equivalent to computing a linear regression model which assumes a polynomial of the form
+Note that, in the special case where the *y*-intercept is `0`, this is equivalent to computing a linear model which assumes a polynomial of the form
 
 ```
 f(x) = y = bx
@@ -151,7 +151,7 @@ var coeffs = model.coefficients;
 
 ##### model.residuals()
 
-Computes the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
+Computes the differences between each observation `y_i` and its corresponding prediction `f(x_i) = y^{hat}_i`.
 
 ``` javascript
 
@@ -169,7 +169,7 @@ Computes estimated confidence intervals.
 
 ##### model.summary()
 
-Computes a statistical summary.
+Generates a statistical summary.
 
 ``` javascript
 
@@ -185,12 +185,18 @@ Generates a predictor `function`.
 ```
 
 
-##### model.print()
+##### model.toString()
 
-Pretty prints a model to the console.
+Pretty prints a model.
 
 ``` javascript
+var str = model.toString();
+/* returns
 
+=> TBD
+
+
+*/
 ```
 
 
@@ -200,7 +206,7 @@ Pretty prints a model to the console.
 
 ## Notes
 
-The (simple) linear regression model assumes a *linear polynomial* of the form
+Simple linear regression assumes a *linear polynomial* of the form
 
 ```
 f(x) = y = a + bx
