@@ -97,7 +97,7 @@ model = lr( data, {
 });
 ```
 
-By default, the implementation assumes both the slope and *y*-intercept are __unknown__. Should either one or both be known, set the corresponding options.
+By default, the implementation assumes that both the slope and *y*-intercept are __unknown__. Should either one or both be known, set the corresponding options.
 
 ``` javascript
 var model;
@@ -151,10 +151,11 @@ var coeffs = model.coefficients;
 
 ##### model.residuals()
 
-Computes the differences between each observation `y_i` and its corresponding prediction `f(x_i) = y^{hat}_i`.
+Computes the difference between each observation `y_i` and its corresponding prediction `f(x_i) = y^{hat}_i`.
 
 ``` javascript
-
+var residuals = model.residuals();
+// returns [...]
 ```
 
 
@@ -163,7 +164,8 @@ Computes the differences between each observation `y_i` and its corresponding pr
 Computes estimated confidence intervals.
 
 ``` javascript
-
+var ci = model.ci();
+// returns [[],[],...,[]]
 ```
 
 
@@ -172,17 +174,55 @@ Computes estimated confidence intervals.
 Generates a statistical summary.
 
 ``` javascript
-
+var summary = model.summary();
+// returns {...}
 ```
 
-
-##### model.predictor()
-
-Generates a predictor `function`.
+The returned `summary` is an `object` comprised as follows...
 
 ``` javascript
+{
 
+}
 ```
+
+
+##### model.predict( x[, opts] )
+
+Based on the linear model, computes a predicted response `y^{hat}_i` for each `x_i`. `x` may be either a single input value or an input `array`.
+
+``` javascript
+var prediction,
+	x;
+
+// Single input value...
+x = 5;
+
+prediction = model.predict( x );
+// returns {...}
+
+// Input array...
+x = [...];
+
+prediction = model.predict( x );
+// returns {...}
+```
+
+The method accepts the following `options`...
+
+*	__ci__: `boolean` indicating whether to compute confidence intervals for predicted responses. Default: `false`.
+
+To compute confidence intervals, set the `ci` option to `true`.
+
+``` javascript
+var x = [...];
+
+var prediction = model.predict( x, {
+	'ci': true	
+});
+// returns {...}
+```
+
 
 
 ##### model.toString()
