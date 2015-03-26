@@ -196,9 +196,9 @@ The (simple) linear regression model assumes a *linear polynomial* of the form
 f(x) = y = a + bx
 ```
 
-describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the *explanatory*, *predictor*, or *regressor* variable, and `y` is commonly referred to as the *response* variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`. Geometrically, `f(x)` is a straight line having a *y*-intercept `a` and a slope `b`.
+describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the __explanatory__, __predictor__, or __regressor__ variable, and `y` is commonly referred to as the __response__ variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`. Geometrically, `f(x)` is a straight line having a *y*-intercept `a` and a slope `b`.
 
-To determine the model parameters `a` and `b`, this implementation uses [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares) (OLS) to fit a straight line to the data. Intuitively, our goal is to find a line having a slope and *y*-intercept which minimizes the distance between an observation and its corresponding fitted value. To achieve this goal, OLS seeks to minimize the following function
+To determine the model parameters `a` and `b`, this implementation uses [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares) (OLS) to fit a straight line to the data. Intuitively, our goal is to find a line having a slope and *y*-intercept which minimizes the distance between an observation and its corresponding fitted (predicted) value. To achieve this goal, OLS seeks to minimize the following function
 
 ```
 L = sum^{N-1}_{i=0} [y_i - f(x_i)]^2
