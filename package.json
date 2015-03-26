@@ -1,7 +1,7 @@
 {
   "name": "compute-linear-regression",
   "version": "0.0.0",
-  "description": "Linear regression.",
+  "description": "Simple linear regression.",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"

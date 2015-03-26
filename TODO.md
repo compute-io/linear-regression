@@ -60,4 +60,6 @@ TODO
 	-	allow encoding to be specified?
 	-	will affect how values are copied!
 	-	dido for prediction, how to handle? skip over...
-9. 
+9. check against `len < 2`!!!
+	-	only a single data point; unless pass through (0,0), then cannot model!
+10. 
