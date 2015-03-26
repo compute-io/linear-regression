@@ -1,12 +1,11 @@
 TODO
 ====
 
-1. `predictor` option
+1. `predictor` method
 	-	return `function` (generate) for computing predictions based on the model parameters
 		-	`new Function()`
-2. `rsquared` option
-	-	return coefficient of determination
-3. `summary` option
+2. 
+3. `summary` method
 	-	return a statistical [summary](http://www.r-tutor.com/elementary-statistics/simple-linear-regression/significance-test-linear-regression)
 	-	num observations
 	-	F statistic / prob of F stat
@@ -32,4 +31,9 @@ TODO
 	-	
 5. see [linear model](http://www.mathworks.com/help/stats/linearmodel.fit.html)
 	-	when move beyond single explanatory variable
-6. 
+6. In `README.md` notes section,
+	-	state assumptions of OLS
+	-	when to use/when not to use
+	-	note how taking the squared difference gives greater weight to large deviations
+		-	note sensitivity to outliers
+7. 

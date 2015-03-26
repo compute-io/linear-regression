@@ -38,8 +38,8 @@ The function accepts the following `options`:
 * 	__accessors__: `object` providing accessor `functions`.
 	-	__x__: accessor `function` for accessing explanatory values.
 	-	__y__: accessor `function` for accessing response values.
-*	__slope__: known slope; i.e., known `b`.
-*	__intercept__: known *y*-intercept; i.e., known `a`.
+*	__slope__: known slope.
+*	__intercept__: known *y*-intercept.
 
 For non-numeric `arrays`, provide accessor `functions` for accessing `array` values.
 
@@ -66,13 +66,79 @@ var model = lr( x, y, {
 });
 ```
 
+By default, the implementation assumes both the slope and *y*-intercept are unknown. Should either one or both be known, set the corresponding options.
+
+``` javascript
+var model;
+
+// Known y-intercept:
+model = lr( x, y, {
+	'intercept': 100
+});
+
+// Known slope:
+model = lr( x, y, {
+	'slope': 5
+});
+```
+
+Additionally, to compute a linear regression model which assumes a polynomial of the form
+
+```
+f(x) = y = bx
+```
+
+set the *y*-intercept to `0`.
 
 
-*	__residuals__: `boolean` indicating whether to return the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
-*	__ci__: `boolean` indicating whether to return estimate confidence intervals.
-*	__summary__: `boolean` indicating whether to return a statistical summary.
-*	__predictor__: `boolean` indicating whether to return a predictor `function`.
-*	...
+#### model
+
+The return linear regression model has the following methods...
+
+
+##### model.residuals()
+
+Returns the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
+
+``` javascript
+
+```
+
+
+##### model.ci()
+
+Returns estimated confidence intervals.
+
+``` javascript
+
+```
+
+
+##### model.summary()
+
+Returns a statistical summary.
+
+``` javascript
+
+```
+
+
+##### model.predictor()
+
+Returns a predictor `function`.
+
+``` javascript
+
+```
+
+
+##### model.print()
+
+Pretty prints a model to the console.
+
+``` javascript
+
+```
 
 
 
