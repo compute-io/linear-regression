@@ -22,23 +22,7 @@ var lr = require( 'compute-linear-regression' );
 
 #### lr( x, y[, opts] )
 
-Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. The model assumes a *linear polynomial* of the form
-
-```
-f(x) = y = a + bx
-```
-
-describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the *explanatory*, *predictor*, or *regressor* variable, and `y` is commonly referred to as the *response* variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`. Geometrically, `f(x)` is a straight line having a *y*-intercept `a` and a slope `b`.
-
-To determine the model parameters `a` and `b`, this implementation uses [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares) (OLS) to fit a straight line to the data. Intuitively, our goal is to find a line having a slope and *y*-intercept which minimizes the distance between an observation and its corresponding fitted value. To achieve this goal, OLS seeks to minimize the following function
-
-```
-L = sum^{N-1}_{i=0} [y_i - f(x_i)]^2
-```
-
-where `N` is the number of observations and `y_i - f(x_i)` corresponds to the vertical distance between an observation `y_i` and a predicted value `f(x_i)`. The smaller each distance between `y_i` and `f(x_i)` is, the smaller the sum and the better the fit.
-
-To compute a (simple) linear regression model,
+Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. 
 
 ``` javascript
 var x, y;
@@ -104,6 +88,25 @@ To run the example code from the top-level application directory,
 ``` bash
 $ node ./examples/index.js
 ```
+
+
+## Overview
+
+The (simple) linear regression model assumes a *linear polynomial* of the form
+
+```
+f(x) = y = a + bx
+```
+
+describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the *explanatory*, *predictor*, or *regressor* variable, and `y` is commonly referred to as the *response* variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`. Geometrically, `f(x)` is a straight line having a *y*-intercept `a` and a slope `b`.
+
+To determine the model parameters `a` and `b`, this implementation uses [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares) (OLS) to fit a straight line to the data. Intuitively, our goal is to find a line having a slope and *y*-intercept which minimizes the distance between an observation and its corresponding fitted value. To achieve this goal, OLS seeks to minimize the following function
+
+```
+L = sum^{N-1}_{i=0} [y_i - f(x_i)]^2
+```
+
+where `N` is the number of observations and `y_i - f(x_i)` corresponds to the vertical distance between an observation `y_i` and a predicted value `f(x_i)`. The smaller each distance between `y_i` and `f(x_i)` is, the smaller the sum and the better the fit.
 
 
 ## Tests
