@@ -211,7 +211,27 @@ prediction = model.predict( x );
 
 The method accepts the following `options`...
 
+* 	__accessor__: accessor `function` for accessing `x_i` values.
 *	__ci__: `boolean` indicating whether to compute confidence intervals for predicted responses. Default: `false`.
+
+For a non-numeric input `array`, provide an accessor `function` for accessing `x_i` values.
+
+``` javascript
+function xValue( d ) {
+	return d[ 0 ];
+}
+
+var x = [
+	[0],
+	[1],
+	...
+];
+
+var prediction = model.predicct( x, {
+	'accessor': xValue
+});
+// returns {...}
+```
 
 To compute confidence intervals, set the `ci` option to `true`.
 

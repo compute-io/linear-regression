@@ -50,4 +50,14 @@ TODO
 	-	when to use/when not to use
 	-	note how taking the squared difference gives greater weight to large deviations
 		-	note sensitivity to outliers
-7. 
+7. coefficient naming
+	-	slope and intercept???
+	-	constant and ...
+	-	a, b
+		-	lends itself to a, b1, b2, b3,... for other linear models involving multiple explanatory variables
+8. missing values
+	-	how to handle?
+	-	allow encoding to be specified?
+	-	will affect how values are copied!
+	-	dido for prediction, how to handle? skip over...
+9. 
