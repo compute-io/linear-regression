@@ -4,7 +4,18 @@ TODO
 1. `predictor` method
 	-	return `function` (generate) for computing predictions based on the model parameters
 		-	`new Function()`
-2. 
+2. allow for only a single input `array`
+	-	if no accessors, assume a zipped array
+
+	``` javascript
+	function xValue( d ) {
+		return d[ 0 ];
+	}
+	function yValue( d ) {
+		return d[ 1 ];
+	}
+	```
+
 3. `summary` method
 	-	return a statistical [summary](http://www.r-tutor.com/elementary-statistics/simple-linear-regression/significance-test-linear-regression)
 	-	num observations

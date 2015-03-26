@@ -20,7 +20,7 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 var lr = require( 'compute-linear-regression' );
 ```
 
-#### lr( x, y[, opts] )
+#### lr( x[, y[, opts] ] )
 
 Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. 
 
@@ -33,6 +33,19 @@ y = [ ];
 var model = lr( x, y );
 ```
 
+If provided a single `array`, the function assumes a [zipped](https://github.com/compute-io/zip) `array` of 2-element tuples `[x_i,y_i]`.
+
+``` javascript
+var data = [
+	[0,1],
+	[1,2],
+	[2,3],
+	...
+];
+
+var model = lr( data );
+```
+
 The function accepts the following `options`:
 
 * 	__accessors__: `object` providing accessor `functions`.
@@ -41,24 +54,42 @@ The function accepts the following `options`:
 *	__slope__: known slope.
 *	__intercept__: known *y*-intercept.
 
-For non-numeric `arrays`, provide accessor `functions` for accessing `array` values.
+To provide arbitrary access to input `array` values, provide accessor `functions`.
 
 ``` javascript
-function xValue( d ) {
+function xValue( d, i ) {
 	return d.x;
 }
 
-function yValue( d ) {
+function yValue( d, i ) {
 	return d.y;
 }
 
-var data = [
+var x, y, data, model;
+
+// Separate input arrays...
+x = [
+	{'x':0},
+	{'x':1},
+	...
+];
+
+y = [];
+
+model = lr( x, y, {
+	'accessors': {
+		'x': xValue
+	}
+});
+
+// Single input array...
+data = [
 	{'x':0,'y':1},
 	{'x':1,'y':2},
 	...
 ];
 
-var model = lr( x, y, {
+model = lr( data, {
 	'accessors': {
 		'x': xValue,
 		'y': yValue
