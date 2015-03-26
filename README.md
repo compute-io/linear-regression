@@ -135,9 +135,9 @@ var model = lr( x, y, {
 
 
 ===
-#### model
+#### Model
 
-The computed linear model has the following properties and methods...
+The computed linear `model` has the following properties and methods...
 
 
 ##### model.coefficients
@@ -162,7 +162,7 @@ var residuals = model.residuals();
 
 ##### model.ci()
 
-Computes estimated confidence intervals for the model parameters.
+Computes confidence intervals for the estimated model parameters.
 
 ``` javascript
 var ci = model.ci();
