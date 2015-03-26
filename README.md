@@ -66,7 +66,7 @@ var model = lr( x, y, {
 });
 ```
 
-By default, the implementation assumes both the slope and *y*-intercept are unknown. Should either one or both be known, set the corresponding options.
+By default, the implementation assumes both the slope and *y*-intercept are __unknown__. Should either one or both be known, set the corresponding options.
 
 ``` javascript
 var model;
@@ -80,9 +80,15 @@ model = lr( x, y, {
 model = lr( x, y, {
 	'slope': 5
 });
+
+// Both are known:
+model = lr( x, y, {
+	'slope': 5,
+	'intercept': 100
+});
 ```
 
-Additionally, to compute a linear regression model which assumes a polynomial of the form
+Additionally, to compute a linear regression model which assumes a polynomial of the form (i.e., lacking a constant term)
 
 ```
 f(x) = y = bx
@@ -90,15 +96,21 @@ f(x) = y = bx
 
 set the *y*-intercept to `0`.
 
+``` javascript
+var model = lr( x, y, {
+	'intercept': 0
+});
+```
+
 
 #### model
 
-The return linear regression model has the following methods...
+The computed linear regression model has the following methods...
 
 
 ##### model.residuals()
 
-Returns the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
+Computes the differences between each observation `y_i` and the corresponding prediction `y^{hat}_i`.
 
 ``` javascript
 
@@ -107,7 +119,7 @@ Returns the differences between each observation `y_i` and the corresponding pre
 
 ##### model.ci()
 
-Returns estimated confidence intervals.
+Computes estimated confidence intervals.
 
 ``` javascript
 
@@ -116,7 +128,7 @@ Returns estimated confidence intervals.
 
 ##### model.summary()
 
-Returns a statistical summary.
+Computes a statistical summary.
 
 ``` javascript
 
@@ -125,7 +137,7 @@ Returns a statistical summary.
 
 ##### model.predictor()
 
-Returns a predictor `function`.
+Generates a predictor `function`.
 
 ``` javascript
 
