@@ -88,13 +88,13 @@ model = lr( x, y, {
 });
 ```
 
-Additionally, to compute a linear regression model which assumes a polynomial of the form (i.e., lacking a constant term)
+Note that, in the special case where the *y*-intercept is `0`, this is equivalent to computing a linear regression model which assumes a polynomial of the form
 
 ```
 f(x) = y = bx
 ```
 
-set the *y*-intercept to `0`.
+Hence, to compute a model lacking a constant term
 
 ``` javascript
 var model = lr( x, y, {
