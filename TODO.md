@@ -4,6 +4,7 @@ TODO
 1. `predictor` method
 	-	return `function` (generate) for computing predictions based on the model parameters
 		-	`new Function()`
+	-	should provide option to return the confidence intervals of a prediction
 2. allow for only a single input `array`
 	-	if no accessors, assume a zipped array
 
@@ -35,6 +36,8 @@ TODO
 	-	mse
 	- 	aic
 	-	bic
+	-	skew
+	-	kurt
 	-	influential observations
 	-	see [statsmodels](http://statsmodels.sourceforge.net/devel/examples/notebooks/generated/ols.html)
 4. results to have a print method?

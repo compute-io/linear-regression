@@ -2,7 +2,7 @@ Simple Linear Regression
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable.
+> A [least squares](http://en.wikipedia.org/wiki/Least_squares) [estimator](http://stats.stackexchange.com/questions/7581/what-is-the-relation-between-estimator-and-estimate) of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable.
 
 
 ## Installation
@@ -22,7 +22,7 @@ var lr = require( 'compute-linear-regression' );
 
 #### lr( x[, y[, opts] ] )
 
-Computes a least squares estimator of a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) model having a single explanatory variable. 
+Performs a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regression) to model the relationship between an independent variable `x` and a dependent variable `y`. 
 
 ``` javascript
 var x, y;
@@ -136,7 +136,17 @@ var model = lr( x, y, {
 
 #### model
 
-The computed linear regression model has the following methods...
+The computed linear model has the following properties and methods...
+
+
+##### model.coefficients
+
+Model coefficients. Two coefficients are determined from the linear regression: __slope__ and __intercept__. 
+
+``` javascript
+var coeffs = model.coefficients;
+// returns {'slope':5,'intercept':100}
+```
 
 
 ##### model.residuals()
@@ -196,15 +206,15 @@ The (simple) linear regression model assumes a *linear polynomial* of the form
 f(x) = y = a + bx
 ```
 
-describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the __explanatory__, __predictor__, or __regressor__ variable, and `y` is commonly referred to as the __response__ variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`. Geometrically, `f(x)` is a straight line having a *y*-intercept `a` and a slope `b`.
+describing the relationship between an independent variable `x` and a dependent variable `y`. `x` is commonly referred to as the __explanatory__, __predictor__, or __regressor__ variable, and `y` is commonly referred to as the __response__ variable. `a` and `b` are (possibly) unknown __coefficients__ to be determined based on the inputs `x` and `y`. Interpreted geometrically, `f(x)` is a straight line having a *y*-intercept `a` and a slope `b`.
 
-To determine the model parameters `a` and `b`, this implementation uses [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares) (OLS) to fit a straight line to the data. Intuitively, our goal is to find a line having a slope and *y*-intercept which minimizes the distance between an observation and its corresponding fitted (predicted) value. To achieve this goal, OLS seeks to minimize the following function
+To determine the model parameters `a` and `b`, this implementation uses [ordinary least squares](http://en.wikipedia.org/wiki/Ordinary_least_squares) (OLS) to fit a straight line to the data. Intuitively, our goal is to find a line having a slope and *y*-intercept which minimizes the distance between an observation and its corresponding fitted (predicted) value. To achieve this goal, OLS seeks to minimize the function
 
 ```
 L = sum^{N-1}_{i=0} [y_i - f(x_i)]^2
 ```
 
-where `N` is the number of observations and `y_i - f(x_i)` corresponds to the vertical distance between an observation `y_i` and a predicted value `f(x_i)`. The smaller each distance between `y_i` and `f(x_i)` is, the smaller the sum and the better the fit.
+where `N` is the number of observations and `y_i - f(x_i)` corresponds to the vertical distance between an observation `y_i` and a predicted value `f(x_i)`. The smaller each distance between `y_i` and `f(x_i)` is, the smaller the sum and the better the fit (prediction).
 
 
 
