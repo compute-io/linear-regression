@@ -97,7 +97,7 @@ model = lr( data, {
 });
 ```
 
-By default, the implementation assumes that both the slope and *y*-intercept are __unknown__. Should either one or both be known, set the corresponding options.
+By default, the implementation assumes that all model parameters (slope and *y*-intercept) are __unknown__. Should either one or both be known, set the corresponding options.
 
 ``` javascript
 var model;
@@ -140,13 +140,13 @@ var model = lr( x, y, {
 The computed linear `model` has the following properties and methods...
 
 
-##### model.coefficients
+##### model.params
 
-Model coefficients. Two coefficients are determined from the linear regression: __slope__ and __intercept__. 
+Model parameters and corresponding linear regression coefficients. The model has two parameters: __slope__ and __intercept__. 
 
 ``` javascript
-var coeffs = model.coefficients;
-// returns {'slope':5,'intercept':100}
+var params = model.params;
+// returns [5,100] => [slope, y-intercept]
 ```
 
 

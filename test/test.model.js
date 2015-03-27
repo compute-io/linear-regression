@@ -7,7 +7,7 @@ var // Expectation library:
 	chai = require( 'chai' ),
 
 	// Module to be tested:
-	createModel = require( './../lib' );
+	createModel = require( './../lib/model.js' );
 
 
 // VARIABLES //
@@ -30,19 +30,33 @@ describe( 'model', function tests() {
 		assert.isObject( model );
 	});
 
-	describe( 'model#coeffs', function tests() {
+	describe( 'model#params', function tests() {
 
-		it( 'should have a coefficients attribute', function test() {
-			expect( model.coefficients ).to.be.an ('object' );
+		it( 'should have an attribute to access model parameters', function test() {
+			expect( model.params ).to.be.an ('array' );
 		});
 
-		it( 'should be read-only' );
+		it( 'should be immutable', function test() {
+			var params = model.params;
 
-		it( 'should contain a numeric slope' );
+			params[ 0 ] = 'foo';
+			assert.notOk( model.params[ 0 ] === params[ 0 ] );
 
-		it( 'should contain a numeric y-intercept' );
+			expect( foo ).to.throw( Error );
+			function foo() {
+				model.params = 'beep';
+			}
+		});
 
-	}); // end TESTS coeffs
+		it( 'should contain a numeric slope', function test() {
+			expect( model.params[ 1 ] ).to.be.a( 'number' );
+		});
+
+		it( 'should contain a numeric y-intercept', function test() {
+			expect( model.params[ 0 ] ).to.be.a( 'number' );
+		});
+
+	}); // end TESTS params
 
 	describe( 'model#residuals', function tests() {
 
@@ -64,7 +78,13 @@ describe( 'model', function tests() {
 			expect( model.ci ).to.be.a( 'function' );
 		});
 
-		it( 'should return a(n)...' );
+		it( 'should return an array of arrays', function test() {
+			var ci = model.ci();
+			assert.isArray( ci );
+			for ( var i = 0; i < ci.length; i++ ) {
+				assert.isArray( ci[ i ] );
+			}
+		});
 
 		it( 'should compute confidence intervals for estimated model parameters' );
 

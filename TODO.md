@@ -63,4 +63,7 @@ TODO
 9. check against `len < 2`!!!
 	-	only a single data point; unless pass through (0,0), then cannot model!
 	-	should it return `null` or error?
-10. 
+10. for the more general linear model implementation, ability to set the coefficient names
+	-	here, the names are assumed `slope` and `intercept`
+	-	in the more general case, may want to associate a feature with a particular coefficient value --> essentially creating a mapping
+11. 

@@ -8,14 +8,14 @@ var y = [ 3.7, 7.8, 12.1, 15.6, 19.8, 24.5, 31.1, 35.5, 39.4, 39.5 ];
 
 var model = lr( x, y );
 
-console.log( model.coefficients );
+console.log( model.params );
 
 x = [ 5, 10, 15, 20, 25, 30, 32 ];
 y = [ 17.1, 29.6, 63.6, 117.1, 186.4, 346.5, 285.1 ];
 
 model = lr( x, y );
 
-console.log( model.coefficients );
+console.log( model.params );
 
 x = [
 	2.745,
@@ -75,7 +75,7 @@ y = [
 
 model = lr( x, y );
 
-console.log( model.coefficients );
+console.log( model.params );
 
 x = [
 	22,
@@ -109,7 +109,7 @@ model = lr( x, y, {
 	'intercept': 0
 });
 
-console.log( model.coefficients );
+console.log( model.params );
 
 var xy = 0;
 var x2 = 0;
