@@ -142,11 +142,11 @@ The computed linear `model` has the following properties and methods...
 
 ##### model.params
 
-Model parameters and corresponding linear regression coefficients. The model has two parameters: __slope__ and __intercept__. 
+Model parameters and corresponding linear regression coefficients. The model has two parameters: __intercept__ and __slope__. 
 
 ``` javascript
 var params = model.params;
-// returns [5,100] => [slope, y-intercept]
+// returns [5,100] => [y-intercept, slope]
 ```
 
 
