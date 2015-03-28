@@ -150,12 +150,12 @@ var params = model.params;
 ```
 
 
-##### model.residuals()
+##### model.residuals
 
-Computes the difference between each observation `y_i` and its corresponding prediction `f(x_i) = y^{hat}_i`.
+Model __residuals__; i.e., the difference between each observation `y_i` and its corresponding prediction `f(x_i) = y^{hat}_i`.
 
 ``` javascript
-var residuals = model.residuals();
+var residuals = model.residuals;
 // returns [...]
 ```
 

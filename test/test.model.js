@@ -79,18 +79,14 @@ describe( 'model', function tests() {
 
 	describe( 'model#residuals', function tests() {
 
-		it( 'should provide a method to calculate residuals', function test() {
-			expect( model.residuals ).to.be.a( 'function' );
+		it( 'should provide an attribute to access model residuals', function test() {
+			expect( model.residuals ).to.be.an( 'array' );
 		});
 
-		it( 'should return an array', function test() {
-			expect( model.residuals() ).to.be.an( 'array' );
-		});
-
-		it( 'should compute the residuals', function test() {
+		it( 'should return the residuals', function test() {
 			var actual, expected;
 
-			actual = model.residuals();
+			actual = model.residuals;
 			expected = [
 				-5,
 				5,
@@ -105,6 +101,18 @@ describe( 'model', function tests() {
 			];
 
 			assert.deepEqual( actual, expected );
+		});
+
+		it( 'should be immutable', function test() {
+			var arr = model.residuals;
+
+			arr[ 0 ] = 'foo';
+			assert.notOk( model.residuals[ 0 ] === arr[ 0 ] );
+
+			expect( foo ).to.throw( Error );
+			function foo() {
+				model.residuals = 'beep';
+			}
 		});
 
 	}); // end TESTS residuals
