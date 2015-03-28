@@ -119,15 +119,30 @@ describe( 'model', function tests() {
 
 	describe( 'model#ci', function tests() {
 
-		it( 'should provide a method to compute confidence intervals for estimated model parameters', function test() {
-			expect( model.ci ).to.be.a( 'function' );
+		it( 'should provide an attribute to access confidence intervals for estimated model parameters', function test() {
+			expect( model.ci ).to.be.an( 'array' );
 		});
 
 		it( 'should return an array of arrays', function test() {
-			var ci = model.ci();
+			var ci = model.ci;
 			assert.isArray( ci );
 			for ( var i = 0; i < ci.length; i++ ) {
 				assert.isArray( ci[ i ] );
+			}
+		});
+
+		it( 'should be immutable', function test() {
+			var arr = model.ci;
+
+			arr[ 0 ] = 'foo';
+			assert.notOk( model.ci[ 0 ] === arr[ 0 ] );
+
+			arr[ 0 ][ 0 ] = 'foo';
+			assert.notOk( model.ci[ 0 ][ 0 ] === arr[ 0 ][ 0 ] );
+
+			expect( foo ).to.throw( Error );
+			function foo() {
+				model.ci = 'beep';
 			}
 		});
 
@@ -137,12 +152,20 @@ describe( 'model', function tests() {
 
 	describe( 'model#summary', function tests() {
 
-		it( 'should provide a method to generate a statistical summary', function test() {
-			expect( model.summary ).to.be.a( 'function' );
+		it( 'should provide an attribute to access a model\'s statistical summary', function test() {
+			expect( model.summary ).to.be.an( 'object' );
 		});
 
-		it( 'should return an object', function test() {
-			expect( model.summary() ).to.be.an( 'object' );
+		it( 'should be immutable', function test() {
+			var summary = model.summary;
+
+			summary.a = 'foo';
+			assert.notOk( model.summary.hasOwnProperty( 'a' ) );
+
+			expect( foo ).to.throw( Error );
+			function foo() {
+				model.summary = 'beep';
+			}
 		});
 
 		it( 'should generate a statistical summary' );

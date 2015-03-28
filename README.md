@@ -160,26 +160,26 @@ var residuals = model.residuals;
 ```
 
 
-##### model.ci()
+##### model.ci
 
-Computes confidence intervals for the estimated model parameters.
+Confidence intervals for the estimated model parameters.
 
 ``` javascript
-var ci = model.ci();
+var ci = model.ci;
 // returns [[],[]]
 ```
 
 
-##### model.summary()
+##### model.summary
 
-Generates a statistical summary.
+A model's statistical summary.
 
 ``` javascript
-var summary = model.summary();
+var summary = model.summary;
 // returns {...}
 ```
 
-The returned `summary` is an `object` comprised as follows...
+A model's `summary` is an `object` comprised as follows...
 
 ``` javascript
 {
