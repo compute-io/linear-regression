@@ -48,12 +48,12 @@ describe( 'model', function tests() {
 			}
 		});
 
-		it( 'should contain a numeric slope', function test() {
-			expect( model.params[ 1 ] ).to.be.a( 'number' );
-		});
-
 		it( 'should contain a numeric y-intercept', function test() {
 			expect( model.params[ 0 ] ).to.be.a( 'number' );
+		});
+
+		it( 'should contain a numeric slope', function test() {
+			expect( model.params[ 1 ] ).to.be.a( 'number' );
 		});
 
 	}); // end TESTS params

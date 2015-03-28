@@ -166,7 +166,7 @@ Computes confidence intervals for the estimated model parameters.
 
 ``` javascript
 var ci = model.ci();
-// returns [[],[],...,[]]
+// returns [[],[]]
 ```
 
 
@@ -221,11 +221,7 @@ function xValue( d ) {
 	return d[ 0 ];
 }
 
-var x = [
-	[0],
-	[1],
-	...
-];
+var x = [ [0], [1], ...];
 
 var prediction = model.predict( x, {
 	'accessor': xValue
