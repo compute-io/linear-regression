@@ -337,6 +337,8 @@ where `N` is the number of observations and `y_i - f(x_i)` corresponds to the ve
 
 ``` javascript
 var lr = require( 'compute-linear-regression' );
+
+// TODO: mini-tutorial.
 ```
 
 To run the example code from the top-level application directory,
@@ -345,6 +347,11 @@ To run the example code from the top-level application directory,
 $ node ./examples/index.js
 ```
 
+
+### Data Sources
+
+Three of the example data sets are from the following source:
+*	Larsen, Richard J., Marx, Morris L. (2006) *An Introduction to Mathematical Statistics and its Applications*. 4th Edition. pages 646-661.
 
 
 ## Tests
