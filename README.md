@@ -259,6 +259,7 @@ __Note__: the method returns the following outputs...
 *	if provided a single input value and `opts.ci === false`, the method returns a `numeric` value.
 *	if provided an input value `array` and `opts.ci === false`, the method returns a `numeric array`.
 *	if `opts.ci === true`, the method returns an `array` of `arrays`, where each sub-array is a 3-element tuple
+
 	```
 	[ prediction, lower_bound, upper_bound ]
 	```
