@@ -213,7 +213,7 @@ The method accepts the following `options`...
 
 * 	__accessor__: accessor `function` for accessing `x_i` values.
 *	__ci__: `boolean` indicating whether to compute confidence intervals for predicted responses. Default: `false`.
-*	__copy__: `boolean` indicating whether to return a new array when computing predicted responses. Default: `true`.
+*	__copy__: `boolean` indicating whether to return a new `array` when computing predicted responses. Default: `true`.
 
 For a non-numeric input `array`, provide an accessor `function` for accessing `x_i` values.
 
@@ -255,6 +255,13 @@ console.log( x === prediction );
 // returns true
 ```
 
+__Note__: the method returns the following outputs...
+*	if provided a single input value and `opts.ci === false`, the method returns a `numeric` value.
+*	if provided an input value `array` and `opts.ci === false`, the method returns a `numeric array`.
+*	if `opts.ci === true`, the method returns an `array` of `arrays`, where each sub-array is a 3-element tuple
+	```
+	[ prediction, lower_bound, upper_bound ]
+	```
 
 
 
