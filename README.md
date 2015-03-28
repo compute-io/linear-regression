@@ -27,8 +27,8 @@ Performs a [linear regression](http://en.wikipedia.org/wiki/Simple_linear_regres
 ``` javascript
 var x, y;
 
-x = [ ];
-y = [ ];
+x = [ 0, 1, 4, 2, 3, 3, 2, 4, 0, 1 ];
+y = [ 10, 18, 24.75, 16.5, 14, 26, 13.5, 25.25, 0, 2 ];
 
 var model = lr( x, y );
 ```
@@ -37,10 +37,16 @@ If provided a single `array`, the function assumes a [zipped](https://github.com
 
 ``` javascript
 var data = [
-	[0,1],
-	[1,2],
-	[2,3],
-	...
+	[0,10],
+	[1,18],
+	[4,24.75],
+	[2,16.5],
+	[3,14],
+	[3,26],
+	[2,13.5],
+	[4,25.25],
+	[0,0],
+	[1,2]
 ];
 
 var model = lr( data );
@@ -71,10 +77,17 @@ var x, y, data, model;
 x = [
 	{'x':0},
 	{'x':1},
-	...
+	{'x':4},
+	{'x':2},
+	{'x':3},
+	{'x':3},
+	{'x':2},
+	{'x':4},
+	{'x':0},
+	{'x':1}
 ];
 
-y = [];
+y = [ 10, 18, 24.75, 16.5, 14, 26, 13.5, 25.25, 0, 2 ];
 
 model = lr( x, y, {
 	'accessors': {
@@ -84,9 +97,16 @@ model = lr( x, y, {
 
 // Single input array...
 data = [
-	{'x':0,'y':1},
-	{'x':1,'y':2},
-	...
+	{'x':0,'y':10},
+	{'x':1,'y':18},
+	{'x':4,'y':24.75},
+	{'x':2,'y':16.5},
+	{'x':3,'y':14},
+	{'x':3,'y':26},
+	{'x':2,'y':13.5},
+	{'x':4,'y':25.25},
+	{'x':0,'y':0},
+	{'x':1,'y':2}
 ];
 
 model = lr( data, {
@@ -104,7 +124,7 @@ var model;
 
 // Known y-intercept:
 model = lr( x, y, {
-	'intercept': 100
+	'intercept': 5
 });
 
 // Known slope:
@@ -115,7 +135,7 @@ model = lr( x, y, {
 // Both are known:
 model = lr( x, y, {
 	'slope': 5,
-	'intercept': 100
+	'intercept': 5
 });
 ```
 
@@ -128,6 +148,9 @@ f(x) = y = bx
 Hence, to compute a model lacking a constant term
 
 ``` javascript
+x = [ 0, 1, 4, 2, 3, 3, 2, 4, 0, 1 ];
+y = [ 5, 13, 19.75, 11.5, 9, 21, 8.5, 20.25, -5, -3 ];
+
 var model = lr( x, y, {
 	'intercept': 0
 });
@@ -146,7 +169,7 @@ Model parameters and corresponding linear regression coefficients. The model has
 
 ``` javascript
 var params = model.params;
-// returns [5,100] => [y-intercept, slope]
+// returns [y-intercept, slope]; e.g., [ 5, 5 ]
 ```
 
 
@@ -156,7 +179,7 @@ Model __residuals__; i.e., the difference between each observation `y_i` and its
 
 ``` javascript
 var residuals = model.residuals;
-// returns [...]
+// returns [ 5, 8, -0.25, 1.5, -6, 6, -1.5, 0.25, -5, -8 ]
 ```
 
 
@@ -166,7 +189,7 @@ Confidence intervals for the estimated model parameters.
 
 ``` javascript
 var ci = model.ci;
-// returns [[],[]]
+// returns [[],[]] // TODO
 ```
 
 
@@ -176,14 +199,14 @@ A model's statistical summary.
 
 ``` javascript
 var summary = model.summary;
-// returns {...}
+// returns {...} // TODO
 ```
 
-A model's `summary` is an `object` comprised as follows...
+A `summary` is an `object` comprised as follows...
 
 ``` javascript
 {
-	...
+	... // TODO
 }
 ```
 
@@ -200,13 +223,13 @@ var prediction,
 x = 5;
 
 prediction = model.predict( x );
-// returns NUMBER
+// returns 30
 
 // Input array...
-x = [...];
+x = [ 4, 0, 5 ];
 
 prediction = model.predict( x );
-// returns [...]
+// returns [ 25, 5, 30 ]
 ```
 
 The method accepts the following `options`...
@@ -222,42 +245,46 @@ function xValue( d ) {
 	return d[ 0 ];
 }
 
-var x = [ [0], [1], ...];
+var x = [
+	{'x':4},
+	{'x':0},
+	{'x':5}
+];
 
 var prediction = model.predict( x, {
 	'accessor': xValue
 });
-// returns [...]
+// returns [ 25, 5, 30 ]
 ```
 
 To compute confidence intervals, set the `ci` option to `true`.
 
 ``` javascript
-var x = [...];
+var x = [ 4, 0, 5 ];
 
 var prediction = model.predict( x, {
 	'ci': true	
 });
-// returns [[],[],...[]]
+// returns [[],[],...[]] // TODO
 ```
 
 To mutate the input `array`, set the `copy` option to `false`.
 
 ``` javascript
-var x = [...];
+var x = [ 4, 0, 5 ];
 
 var prediction = model.predict( x, {
 	'copy': false
 });
-// returns [...]
+// returns [ 25, 5, 30 ]
 
 console.log( x === prediction );
 // returns true
 ```
 
 __Note__: the method returns the following outputs...
-*	if provided a single input value and `opts.ci === false`, the method returns a `numeric` value.
-*	if provided an input value `array` and `opts.ci === false`, the method returns a `numeric array`.
+*	if provided a single `numeric` value and `opts.ci === false`, the method returns a `numeric` value.
+*	if provided a `numeric array` and `opts.ci === false`, the method returns a `numeric array`.
 *	if `opts.ci === true`, the method returns an `array` of `arrays`, where each sub-array is a 3-element tuple
 
 	```
@@ -275,7 +302,7 @@ Pretty prints a model.
 var str = model.toString();
 /* returns
 
-=> TBD
+=> TBD // TODO
 
 
 */
