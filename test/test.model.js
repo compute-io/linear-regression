@@ -7,7 +7,10 @@ var // Expectation library:
 	chai = require( 'chai' ),
 
 	// Module to be tested:
-	createModel = require( './../lib/model.js' );
+	createModel = require( './../lib/model.js' ),
+
+	// Fixture data:
+	data = require( './fixtures/data.json' );
 
 
 // VARIABLES //
@@ -20,7 +23,23 @@ var expect = chai.expect,
 
 describe( 'model', function tests() {
 
-	var model = createModel( [1,2], [1,2], 1, 0 );
+	var model,
+		len,
+		x, y,
+		i;
+
+	len = data.length;
+
+	x = [];
+	for ( i = 0; i < len; i++ ) {
+		x.push( data[ i ][ 0 ] );
+	}
+	y = [];
+	for ( i = 0; i < len; i++ ) {
+		y.push( data[ i ][ 1 ] );
+	}
+
+	model = createModel( x, y, 5, 5 );
 
 	it( 'should export a function', function test() {
 		expect( createModel ).to.be.a( 'function' );
@@ -68,7 +87,25 @@ describe( 'model', function tests() {
 			expect( model.residuals() ).to.be.an( 'array' );
 		});
 
-		it( 'should compute the residuals' );
+		it( 'should compute the residuals', function test() {
+			var actual, expected;
+
+			actual = model.residuals();
+			expected = [
+				-5,
+				5,
+				-8,
+				8,
+				-1.5,
+				1.5,
+				-6,
+				6,
+				-0.25,
+				0.25
+			];
+
+			assert.deepEqual( actual, expected );
+		});
 
 	}); // end TESTS residuals
 
