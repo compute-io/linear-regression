@@ -234,15 +234,15 @@ prediction = model.predict( x );
 
 The method accepts the following `options`...
 
-* 	__accessor__: accessor `function` for accessing `x_i` values.
+* 	__accessor__: accessor `function` for accessing `array` values.
 *	__ci__: `boolean` indicating whether to compute confidence intervals for predicted responses. Default: `false`.
 *	__copy__: `boolean` indicating whether to return a new `array` when computing predicted responses. Default: `true`.
 
-For a non-numeric input `array`, provide an accessor `function` for accessing `x_i` values.
+For a non-numeric input `array`, provide an accessor `function` for accessing `array` values.
 
 ``` javascript
 function xValue( d ) {
-	return d[ 0 ];
+	return d.x;
 }
 
 var x = [
