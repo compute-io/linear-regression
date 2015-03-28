@@ -1,4 +1,4 @@
-/* global require, describe, it */
+/* global require, describe, it, beforeEach */
 'use strict';
 
 // MODULES //
@@ -23,6 +23,8 @@ var expect = chai.expect,
 
 describe( 'model', function tests() {
 
+	// SETUP //
+
 	var model,
 		len,
 		x, y,
@@ -39,7 +41,12 @@ describe( 'model', function tests() {
 		y.push( data[ i ][ 1 ] );
 	}
 
-	model = createModel( x, y, 5, 5 );
+	beforeEach( function before() {
+		model = createModel( x, y, 5, 5 );
+	});
+
+
+	// TESTS //
 
 	it( 'should export a function', function test() {
 		expect( createModel ).to.be.a( 'function' );
@@ -269,7 +276,125 @@ describe( 'model', function tests() {
 			}
 		});
 
-		it( 'should compute a predicted response' );
+		it( 'should throw an error if provided a copy option which is not a boolean', function test() {
+			var values = [
+				'5',
+				5,
+				null,
+				undefined,
+				function(){},
+				NaN,
+				[],
+				{}
+			];
+
+			for ( var i = 0; i < values.length; i++ ) {
+				expect( badValue( values[i] ) ).to.throw( TypeError );
+			}
+			function badValue( value ) {
+				return function() {
+					model.predict( [1,2], {
+						'copy': value
+					});
+				};
+			}
+		});
+
+		it( 'should compute a predicted response', function test() {
+			var actual, expected;
+
+			actual = model.predict( 0 );
+			expected = 5;
+
+			assert.strictEqual( actual, expected );
+
+			actual = model.predict( 4 );
+			expected = 25;
+
+			assert.strictEqual( actual, expected );
+
+			actual = model.predict( 5 );
+			expected = 30;
+
+			assert.strictEqual( actual, expected );
+		});
+
+		it( 'should compute multiple predictions', function test() {
+			var actual, expected;
+
+			actual = model.predict( [0,4,5] );
+			expected = [ 5, 25, 30 ];
+
+			assert.deepEqual( actual, expected );
+		});
+
+		it( 'should compute multiple predictions and return the original array (mutation)', function test() {
+			var xi = [ 0, 4, 5 ],
+				actual,
+				expected;
+
+			expected = [ 5, 25, 30 ];
+
+			// Return a copy...
+			actual = model.predict( xi );
+			assert.deepEqual( actual, expected );
+			assert.notOk( actual === xi );
+
+			// Mutate the original array...
+			actual = model.predict( xi, {
+				'copy': false
+			});
+			assert.deepEqual( actual, expected );
+			assert.strictEqual( actual, xi );
+		});
+
+		it( 'should compute multiple predictions using an accessor', function test() {
+			var xi, actual, expected;
+
+			xi = [
+				{'x':0},
+				{'x':4},
+				{'x':5}
+			];
+
+			actual = model.predict( xi, {
+				'accessor': xValue
+			});
+			expected = [ 5, 25, 30 ];
+
+			assert.deepEqual( actual, expected );
+
+			function xValue( d ) {
+				return d.x;
+			}
+		});
+
+		it( 'should compute multiple predictions using an accessor and return the original array (mutation)', function test() {
+			var xi, actual, expected;
+
+			xi = [
+				{'x':0},
+				{'x':4},
+				{'x':5}
+			];
+
+			actual = model.predict( xi, {
+				'accessor': xValue,
+				'copy': false
+			});
+			expected = [ 5, 25, 30 ];
+
+			assert.deepEqual( actual, expected );
+			assert.strictEqual( actual, xi );
+
+			function xValue( d ) {
+				return d.x;
+			}
+		});
+
+		it( 'should compute a prediction along with confidence intervals' );
+
+		it( 'should compute multiple predictions and their associated confidence intervals' );
 
 	}); // end TESTS predict
 

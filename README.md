@@ -200,19 +200,20 @@ var prediction,
 x = 5;
 
 prediction = model.predict( x );
-// returns {...}
+// returns NUMBER
 
 // Input array...
 x = [...];
 
 prediction = model.predict( x );
-// returns {...}
+// returns [...]
 ```
 
 The method accepts the following `options`...
 
 * 	__accessor__: accessor `function` for accessing `x_i` values.
 *	__ci__: `boolean` indicating whether to compute confidence intervals for predicted responses. Default: `false`.
+*	__copy__: `boolean` indicating whether to return a new array when computing predicted responses. Default: `true`.
 
 For a non-numeric input `array`, provide an accessor `function` for accessing `x_i` values.
 
@@ -226,7 +227,7 @@ var x = [ [0], [1], ...];
 var prediction = model.predict( x, {
 	'accessor': xValue
 });
-// returns {...}
+// returns [...]
 ```
 
 To compute confidence intervals, set the `ci` option to `true`.
@@ -237,8 +238,24 @@ var x = [...];
 var prediction = model.predict( x, {
 	'ci': true	
 });
-// returns {...}
+// returns [[],[],...[]]
 ```
+
+To mutate the input `array`, set the `copy` option to `false`.
+
+``` javascript
+var x = [...];
+
+var prediction = model.predict( x, {
+	'copy': false
+});
+// returns [...]
+
+console.log( x === prediction );
+// returns true
+```
+
+
 
 
 
