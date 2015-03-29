@@ -6,11 +6,11 @@
 var // Expectation library:
 	chai = require( 'chai' ),
 
+	// Utility for computing the mean of an array:
+	mean = require( 'compute-mean' ),
+
 	// Module to be tested:
 	createModel = require( './../lib/model.js' ),
-
-	// Utility for computing the mean of an array:
-	mean = require( './../lib/mean.js' ),
 
 	// Fixture data:
 	data = require( './fixtures/data.json' );
