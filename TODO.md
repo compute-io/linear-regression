@@ -7,28 +7,26 @@ TODO
 	-	**currently**, allow for providing an input `array`, removing the need for fcn generation. While multiple `predict` calls entail repeated validation, this can be avoided by just providing all inputs up front.
 2. 
 3. `summary` method
-	-	return a statistical [summary](http://www.r-tutor.com/elementary-statistics/simple-linear-regression/significance-test-linear-regression)
-	-	num observations
 	-	F statistic / prob of F stat
 	-	[omnibus](http://en.wikipedia.org/wiki/Omnibus_test)
 	-	[jarque-bera test](http://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test)
 	-	[condition number](http://en.wikipedia.org/wiki/Condition_number)
-	-	dof (residuals and model)
-	-	r-squared
-	-	adjusted r-squared
 	-	p-value
 	-	log likelihood
 	-	estimate std error
 	-	t-value
 	-	t-prob
-	-	sum of squares (anova)
-	-	mse
 	- 	aic
 	-	bic
 	-	skew
 	-	kurt
 	-	influential observations
-	-	see [statsmodels](http://statsmodels.sourceforge.net/devel/examples/notebooks/generated/ols.html)
+	-	leverage
+	-	cooks distance
+	-	
+	-	see
+		-	[statsmodels](http://statsmodels.sourceforge.net/devel/examples/notebooks/generated/ols.html)
+		-	[summary](http://www.r-tutor.com/elementary-statistics/simple-linear-regression/significance-test-linear-regression)
 4. results to have a print method?
 	-	pretty printing; see statsmodels
 	-	may want to reconsider overriding `toString()` and rename. `toString` is commonly called by many external things, like when an error occurs on the model, thus resulting in lazy evaluation being triggered unnecessarily.
