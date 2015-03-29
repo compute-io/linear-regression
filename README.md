@@ -162,7 +162,7 @@ var model = lr( x, y, {
 
 The computed linear `model` has the following properties and methods...
 
-__Note__: to prevent the model's state from being corrupted, all properties return copies of internal data structures when accessed. Thus, rather than using the model to access properties, you are encouraged to cache references to accessed model data, as demonstrated in the examples below.
+__Note__: to prevent the model's state from being corrupted, all accessed properties return copies of internal data structures. Thus, rather than repeatedly accessing property values via the model interface, you are encouraged to cache references to accessed model data, as demonstrated in the examples below.
 
 
 ##### model.params
