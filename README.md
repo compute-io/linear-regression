@@ -162,6 +162,8 @@ var model = lr( x, y, {
 
 The computed linear `model` has the following properties and methods...
 
+__Note__: to prevent the model's state from being corrupted, all properties return copies of internal data structures when accessed. Thus, rather than using the model to access properties, you are encouraged to cache references to accessed model data, as demonstrated in the examples below.
+
 
 ##### model.params
 
@@ -170,6 +172,17 @@ Model parameters and corresponding linear regression coefficients. The model has
 ``` javascript
 var params = model.params;
 // returns [y-intercept, slope]; e.g., [ 5, 5 ]
+```
+
+
+
+##### model.fit
+
+Model __fit__; i.e., the predicted value `f(x_i) = y^{hat}_i` for each `x_i`.
+
+``` javascript
+var fit = model.fit;
+// returns [ 5, 10, 25, 15, 20, 20, 15, 25, 5, 10 ]
 ```
 
 

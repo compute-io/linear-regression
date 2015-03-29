@@ -9,6 +9,9 @@ var // Expectation library:
 	// Module to be tested:
 	createModel = require( './../lib/model.js' ),
 
+	// Utility for computing the mean of an array:
+	mean = require( './../lib/mean.js' ),
+
 	// Fixture data:
 	data = require( './fixtures/data.json' );
 
@@ -28,6 +31,7 @@ describe( 'model', function tests() {
 	var model,
 		len,
 		x, y,
+		xmu, ymu,
 		i;
 
 	len = data.length;
@@ -40,9 +44,11 @@ describe( 'model', function tests() {
 	for ( i = 0; i < len; i++ ) {
 		y.push( data[ i ][ 1 ] );
 	}
+	xmu = mean( x );
+	ymu = mean( y );
 
 	beforeEach( function before() {
-		model = createModel( x, y, 5, 5 );
+		model = createModel( x, y, xmu, ymu, 5, 5 );
 	});
 
 
@@ -124,6 +130,46 @@ describe( 'model', function tests() {
 
 	}); // end TESTS residuals
 
+	describe( 'model#fit', function tests() {
+
+		it( 'should provide an attribute to access the model fit', function test() {
+			expect( model.fit ).to.be.an( 'array' );
+		});
+
+		it( 'should return the fit', function test() {
+			var actual, expected;
+
+			actual = model.fit;
+			expected = [
+				5,
+				5,
+				10,
+				10,
+				15,
+				15,
+				20,
+				20,
+				25,
+				25
+			];
+
+			assert.deepEqual( actual, expected );
+		});
+
+		it( 'should be immutable', function test() {
+			var arr = model.fit;
+
+			arr[ 0 ] = 'foo';
+			assert.notOk( model.fit[ 0 ] === arr[ 0 ] );
+
+			expect( foo ).to.throw( Error );
+			function foo() {
+				model.fit = 'beep';
+			}
+		});
+
+	}); // end TESTS fit
+
 	describe( 'model#ci', function tests() {
 
 		it( 'should provide an attribute to access confidence intervals for estimated model parameters', function test() {
@@ -173,6 +219,11 @@ describe( 'model', function tests() {
 			function foo() {
 				model.summary = 'beep';
 			}
+		});
+
+		it( 'should generate a statistical summary', function test() {
+			console.log( model.summary );
+
 		});
 
 		it( 'should generate a statistical summary' );

@@ -4,19 +4,8 @@ TODO
 1. `predictor` method
 	-	return `function` (generate) for computing predictions based on the model parameters
 		-	`new Function()`
-	-	should provide option to return the confidence intervals of a prediction
-2. allow for only a single input `array`
-	-	if no accessors, assume a zipped array
-
-	``` javascript
-	function xValue( d ) {
-		return d[ 0 ];
-	}
-	function yValue( d ) {
-		return d[ 1 ];
-	}
-	```
-
+	-	**currently**, allow for providing an input `array`, removing the need for fcn generation. While multiple `predict` calls entail repeated validation, this can be avoided by just providing all inputs up front.
+2. 
 3. `summary` method
 	-	return a statistical [summary](http://www.r-tutor.com/elementary-statistics/simple-linear-regression/significance-test-linear-regression)
 	-	num observations
@@ -42,7 +31,7 @@ TODO
 	-	see [statsmodels](http://statsmodels.sourceforge.net/devel/examples/notebooks/generated/ols.html)
 4. results to have a print method?
 	-	pretty printing; see statsmodels
-	-	
+	-	may want to reconsider overriding `toString()` and rename. `toString` is commonly called by many external things, like when an error occurs on the model, thus resulting in lazy evaluation being triggered unnecessarily.
 5. see [linear model](http://www.mathworks.com/help/stats/linearmodel.fit.html)
 	-	when move beyond single explanatory variable
 6. In `README.md` notes section,
@@ -55,6 +44,7 @@ TODO
 	-	constant and ...
 	-	a, b
 		-	lends itself to a, b1, b2, b3,... for other linear models involving multiple explanatory variables
+	-	**Currently**, just returning an ordered `array`: `[b0,b1,b2,b3,...]`. This should be general enough for the above case.
 8. missing values
 	-	how to handle?
 	-	allow encoding to be specified?
